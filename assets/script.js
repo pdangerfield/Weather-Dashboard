@@ -10,24 +10,32 @@
 
 var historyList = document.querySelector('ul');
 var searchBtn = document.getElementById('search-button');
-// var apiKey = '{91585b227016d7e64d963eaaca28e0a9}';
+var apiKey = '91585b227016d7e64d963eaaca28e0a9';
+var lat = '40.314117';
+var lon = '-112.006882';
+var cityName = 'Eagle Mountain'
+
+function getWeather(){
+  event.preventDefault();
+var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}`;
 
 
-function getWeather() {
-  console.log("hello");
-var requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=London&limit=5&appid={91585b227016d7e64d963eaaca28e0a9}';
 
 fetch(requestUrl)
 .then(function (response){
-  return response.json();
+  return response.json();  
 })
-.then(function (list) {
-  for (var i = 0; i < list.length; i++) {
+.then(function (data) {
+  console.log(data);
+  for (var i = 0; i < data.length; i++) {
     var listItem = document.createElement('li');
-    listItem.textContent = list[i].weather;
+    listItem.textContent = data[i].weather;
     repoList.appendChild(listItem);
   }
 });
 }
 
 searchBtn.addEventListener('click', getWeather);
+
+
+
