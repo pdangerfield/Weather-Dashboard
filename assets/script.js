@@ -1,15 +1,15 @@
 
 //Todo list
-//- api call to openweather
-//- event listener on form button
+//- api call to openweather -good
+//- event listener on form button - good
 //- event listener on all cities in search history
 //- store search history
 //- function to call api
 //- collect weather from api
-//-obtain API key
+//-obtain API key - done
 
 
-var historyList = document.querySelector('ul');
+var historyList = document.getElementById('history');
 var displayCurrentWeather = document.getElementById('display-current-weather');
 var searchBtn = document.getElementById('search-button');
 var apiKey = '91585b227016d7e64d963eaaca28e0a9';
@@ -24,7 +24,7 @@ var cities = [];
 function getCurrentWeather(event) {
   event.preventDefault();
   var cityName = cityNameEl.value.trim();
-  localStorage.setItem("cities", cityName);
+  localStorage.setItem("cities", JSON.stringify(cityName));
 
   var requestUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityName}&units=imperial&appid=${apiKey}`;
 
@@ -42,7 +42,7 @@ function getCurrentWeather(event) {
       var currentHumidity = document.createElement('li');
       var currentDate = document.createElement('h2');
       var currentWind = document.createElement('li');
-      var iconHeader = document.getElementById('current-weather-icon');
+      var iconHeader = document.getElementById('current-weather-title');
       iconHeader.insertAdjacentHTML('afterend', icon.outerHTML);
       var utcDate = new Date();
       var shiftSeconds = data.timezone;
@@ -50,14 +50,14 @@ function getCurrentWeather(event) {
       var localDate = new Date();
       localDate.setTime(localTime);
       var localDateString = localDate.toLocaleDateString();
-      console.log(iconId);
+  
       
 
       temperature = document.createTextNode("Temp: " + data.main.temp + ' \u00B0F');
       currentCityName = document.createTextNode(data.name);
-      currentCityHumidity = document.createTextNode("The humidity is currently " + data.main.humidity + "%");
+      currentCityHumidity = document.createTextNode("Humidity:  " + data.main.humidity + "%");
       currentCityDate = document.createTextNode(localDateString);
-      wind = document.createTextNode(data.wind.speed + " MPH");
+      wind = document.createTextNode("Wind: " + data.wind.speed + " MPH");
 
 
 
@@ -74,12 +74,15 @@ function getCurrentWeather(event) {
       displayCurrentWeather.appendChild(currentHumidity);      
       displayCurrentWeather.appendChild(currentWind);
 
+
+      var listItem = document.createElement('li');
+          listItem.textContent = data.name;
+          historyList.appendChild(listItem);
+          localStorage.getItem(cityName);
+
     });
 }
 
-//I am presented with the city name, the date, 
-//an icon representation of weather conditions, the temperature, 
-//the humidity, and the the wind speed
 
 
 
