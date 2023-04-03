@@ -223,7 +223,7 @@ function displayFiveDayForecast(data) {
 var forecastContainer = document.getElementById("5-day-forecast");
 forecastContainer.innerHTML = ""; // clear previous content
 
-for (var i = 0; i < data.list.length; i += 8) { // step 8 hours to get daily forecast
+for (var i = 0; i < data.list.length; i += 8) { // step 8 to get daily forecast
   var dayData = data.list[i];
   var card = document.createElement("div");
   card.classList.add("card");
