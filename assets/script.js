@@ -153,7 +153,7 @@ function displayWeatherForCity(cityName){
 //display current weather
       var icon = document.createElement('img');
       var iconId = data.weather[0].icon;
-      icon.src = `https://openweathermap.org/img/wn/${iconId}@2x.png`;
+      icon.src = `http://openweathermap.org/img/w/${iconId}.png`;
       icon.id = 'weather-icon';
       var currentTemp = document.createElement('li');
       var currentCity = document.createElement('h2');
