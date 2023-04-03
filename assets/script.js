@@ -9,6 +9,8 @@
 //-obtain API key - done
 
 
+
+// creating variables
 var historyList = document.getElementById('history');
 var displayCurrentWeather = document.getElementById('display-current-weather');
 var searchBtn = document.getElementById('search-button');
@@ -19,19 +21,23 @@ var cityNameEl = document.querySelector("#city-search")
 var cityName = cityNameEl.value.trim();
 var cities = [];
 
-
+// function to store the name of the city entered into local storage
 
 function storeCities(cityName) {
   cities.push(cityName);
   localStorage.setItem("cities", JSON.stringify(cities));
 }
 
+// function to clear the previous icon when new current weather is loaded
 function clearWeathericon(){
   var existingIcon = document.getElementById('weather-icon');
   if(existingIcon){
     existingIcon.remove();
   }
 }
+
+// function to get the current weather from openAPI and then get the wind, temp, 
+//name, date, humidity and append it to the DOM
 
 function getCurrentWeather(event) {
   event.preventDefault();
@@ -111,6 +117,7 @@ renderCities();
     });
 }
 
+// function to show the cities stored in storage
 function renderCities(){
   historyList.innerHTML = "";
   for(var i = 0; i < cities.length; i++){
@@ -120,7 +127,7 @@ function renderCities(){
   }
 }
 
-
+// initial function when page is loaded that will get the cities and then call the render cities funciton
 function init(){
   var storedCities = JSON.parse(localStorage.getItem("cities"));
 
@@ -129,6 +136,8 @@ function init(){
   }
   renderCities();
 }
+
+// function to display weather when search history is clicked
 
 
 function displayWeatherForCity(cityName){
@@ -197,7 +206,7 @@ function displayWeatherForCity(cityName){
 }
 
 
-
+// function to get the  5 day forecast
 function fiveDayForecast(cityName){
   event.preventDefault();
   var cityName = cityNameEl.value.trim();
@@ -217,7 +226,7 @@ function fiveDayForecast(cityName){
 });
 }
 
-
+//function to display the 5 day forecast
 
 function displayFiveDayForecast(data) {
 var forecastContainer = document.getElementById("5-day-forecast");
